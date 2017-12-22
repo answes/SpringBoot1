@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 @RequestMapping("/article")
 class ArticleController {
-    
+
     @Autowired
     var articleService =ArticleService()
-
-
-
 }
