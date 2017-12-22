@@ -1,0 +1,17 @@
+name: SpringBoot1
+server:
+      port: 8080
+      tomcat.uri-encoding: UTF-8
+spring:
+    http:
+        encoding.force: true
+        encoding.charset: UTF-8
+        encoding.enabled: true
+    datasource:
+        driverClasName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=utf-8
+        username: root
+        password: root
+        type: com.alibaba.druid.pool.DruidDataSource
+mybatis:
+    mapperLocations: classpath:mapper/*.xml
