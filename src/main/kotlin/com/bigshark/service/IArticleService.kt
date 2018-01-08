@@ -12,7 +12,7 @@ interface IArticleService {
     fun create(article: Article):Int
     fun upData(article: Article):Int
     fun getById(id:Long): Article
-    fun selectAll():List<Article>
+    fun selectAll(param:Map<String,String>):List<Article>
     fun delete(id:Long):Int
     fun getByParentId(parentId:Long):List<Article>
 }

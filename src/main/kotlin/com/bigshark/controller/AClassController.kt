@@ -24,7 +24,7 @@ class AClassController {
     @RequestMapping("/create")
     @ResponseBody
     fun create(title:String,info:String): ReslutMap {
-        var aClass = AClass(0,title,info, Date(),null)
+        val aClass = AClass(0,title,info, Date(),null)
         aclassService.create(aClass)
         return ReslutMap()
     }

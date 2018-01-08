@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bigshark.mapper.ArticleMapper">
+    <resultMap id="BaseResultMap" type="com.bigshark.bean.Article">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="parentId" property="parentId" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="author" property="author" jdbcType="VARCHAR"/>
+        <result column="info" property="info" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="updateTime" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="sql">
+        id,parentId,title,author,info,content,createTime,updateTime
+    </sql>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="sql"/>
+        from blog_article
+        WHERE 1=1
+        <if test="param.parentId != null and param.parentId != 0">
+            AND parentId = #{param.parentId}
+        </if>
+        limit 0,20
+    </select>
+
+<select id="getById" resultMap="BaseResultMap">
+    SELECT
+    <include refid="sql"/>
+    FROM  blog_article
+    WHERE id=#{id}
+</select>
+
+    <select id="getByParentId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="sql"/>
+        FROM  blog_article
+        WHERE parentId=#{id}
+    </select>
+
+    <select id="total" resultType="java.lang.Long">
+        select
+        COUNT (1)
+        from blog_article
+        WHERE 1=1
+        <if test="param.parentId != null and param.parentId != 0">
+            AND parentId = #{param.parentId}
+        </if>
+    </select>
+
+    <insert id="create"  useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO blog_article
+        (title,author,info,content,createTime) VALUES (#{title},#{author},#{info},#{content},now())
+    </insert>
+
+    <update id="upDate">
+        UPDATE
+        title = #{title},
+        author = #{author},
+        info = #{info},
+        content = #{content},
+        updateTime = now()
+        FROM blog_article
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE  FROM blog_article WHERE  id = #{id}
+    </delete>
+
+</mapper>

@@ -15,5 +15,5 @@ interface IAClassService {
     fun delete(id:Long):Int
     fun upDate(aClass: AClass):Int
     fun getById(id:Long): AClass
-    fun selectAll(page: Page<AClass>, param:Map<String, Objects>):List<AClass>
+    fun selectAll(param:Map<String, String>):List<AClass>
 }

@@ -1,0 +1,148 @@
+ 
+ html,body{
+    	width: 100%;
+    	height:100%; 
+    	margin: 0px;
+        background-image:url(../image/bg.jpg);
+        background-size:100% 100%;
+        background-repeat:no-repeat;  
+    }
+
+
+        .left_root{
+            float: left;
+            width: 18%;
+            height: 100%;
+        }
+        #top{
+        	width: 100%;
+        	height: 200px;
+        	background-color: #233333;
+        }
+        #img{
+        	width: 80px;
+        	height: 80px;
+            margin-top: -43px;
+            border: 3px solid cadetblue;
+            border-radius: 43px;
+
+        }
+        #aimg img:hover{
+            transform:scale(1.2);
+            -webkit-transform:scale(1.2);
+            -moz-transform:scale(1.2);
+            -o-transform:scale(1.2);
+            -ms-transform:scale(1.2);
+        }
+
+        #name{
+        	text-align: center;
+        	color: #FFFFFF;
+        	font-size: 20px;
+            margin: 8px;
+        } 
+
+        .nav_title{
+            color: #FFFFFF;
+            margin-top: 12px;
+        }
+        .nav_title li{
+            list-style: none;
+            margin-top: 12px;
+        }
+        .nav_title a{
+            color: #FFFFFF;
+
+        }
+
+        #seach{
+            width: 160px;
+            height: 16px;
+            padding: 3px;
+            border:2px solid white;
+            border-radius:25px;
+            -moz-border-radius:25px; /* Old Firefox */
+        }
+        #about_img{
+            width: 30px;
+            height: 30px;
+            padding-left: 5px;
+        }
+
+        .center_root{
+            float: left;
+            width: 65%;
+            height: 100%;
+        }
+
+        #center_list{
+            margin: 12px 20px 20px 12px;
+        }
+
+        .list_item{
+            background-color: red;
+            float: left;
+            width: 100%;
+        }
+
+        .center_title{
+            font-size: 20px;
+            color: white;
+            float: left;
+            margin: 12px 0px 12px 20px;
+        }
+
+        #desc{
+            font-size: 16px;
+            color: white;
+            overflow: hidden;
+            clear: both;
+            padding: 8px 20px 12px 12px;
+        }
+
+        #tips{
+            float: left;
+            color: white;
+            margin: 0px 0px 8px 12px;
+        }
+
+        #rede{
+            float: right;
+            color: white;
+            background-color: blue;
+            margin: 0px 12px 8px 0px;
+            padding: 0px 5px 0px 5px;
+        }
+
+        #rede:hover{
+            color: blue;
+            background-color:white;
+            text-transition: scale(1.2);
+        }
+
+        .center_date{
+            font-size: 12px;
+            color: white;
+            float: right;
+            margin-top: 12px;
+            text-align: center;
+        }
+
+
+        .right_root{
+            float: right;
+            width: 17%;
+            height: 100%;
+        }
+        .right_title{
+            font-size: 16px;
+            text-align: center;
+            color: white;
+        }
+        .right_title p{
+            margin: 12px;
+        }
+        #wx_img{
+            width: 100%;
+            height: 230px;
+        }

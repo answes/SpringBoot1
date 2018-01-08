@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/css.css">
+    <link rel="stylesheet" type="text/css" href="js/layui/css/layui.css">
+    <script type="text/javascript" src="js/vue.js"></script>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/layui/layui.all.js"></script>
+</head>
+<body>
+<!-- 左边栏，作者信息，目录，联系方式等-->
+<div class="left_root">
+    <div id="top">
+
+    </div>
+    <div style="text-align: center;">
+        <a href="index.html" id="aimg"><img id="img" src="image/img.png"></a>
+    </div>
+    <div>
+        <p id="name">bigshark0907</p>
+    </div>
+    <div style="text-align: center;">
+        <input type="text" name="seach" id="seach">
+    </div>
+    <div style="text-align: center; float: none;">
+        <ul class="nav_title">
+            <li >
+                <a href="#"><i class="layui-icon" style="font-size: 30px; color: #1E9FFF;">&#xe68e;</i></a>
+                <ul>
+                    <li></li>
+                </ul>
+            </li>
+            <li >
+                <a href="#">主页</a>
+            </li>
+            <li >
+                <a href="#">所有文章</a>
+            </li>
+            <li >
+                <a href="#">标签云</a>
+            </li>
+            <li >
+                <a href="#">Java书单</a>
+            </li>
+            <li >
+                <a href="#">关于我</a>
+            </li>
+        </ul>
+    </div>
+    <!-- about me -->
+    <div style="text-align: center; margin-top: 12px; ">
+        <span title="新浪微博"><a href="https://www.baidu.com" class="sss"><i class="layui-icon" style="font-size: 30px; color: #1E9FFF;">&#xe611;</i></a></span>
+        <span title="QQ"><a href="https://www.baidu.com"><i class="layui-icon" style="font-size: 30px; color: #1E9FFF;">&#xe60f;</i></a></span>
+        <span title="微信"><a href="https://www.baidu.com"><i class="layui-icon" style="font-size: 30px; color: #1E9FFF;">&#xe658;</i></a></span>
+        <span title="163邮箱"><a href="https://www.baidu.com"><i class="layui-icon" style="font-size: 30px; color: #1E9FFF;">&#xe636;</i></a></span>
+        <span title="github"><a href="https://www.baidu.com"><i class="layui-icon" style="font-size: 30px; color: #1E9FFF;">&#xe63a;</i></a></span>
+    </div>
+</div>
+
+<!-- 中间栏，文章列表，文章内容-->
+<div class="center_root">
+    <div id="center_list">
+
+    </div>
+</div>
+
+<!-- 右边栏，广告等内容-->
+<div class="right_root">
+    <div class="right_title">
+        <p>关注博主公众号，获取博客功更新信息</p>
+        <hr style="height:3px;border:none;" />
+        <img src="image/img.png" id="wx_img">
+    </div>
+    <div id="right_list">
+        <right-item ></right-item>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript">
+
+    window.onload=function () {
+        getArticles(1);
+    };
+
+    var center_data ={
+        title:'标题',
+        createTime:'2017-11-11 00:00：00',
+        info:'这里是简介，简介可以有很多字数，但是你自己看着办就行啦',
+        tips:[
+            {text:'标签1'},
+            {text:'标签2'},
+            {text:'标签3'}
+        ]
+    };
+
+    function getArticles(page) {
+        $.post("/article/getAll",{page:page,parentId:0},function (data) {
+            this.center_data = Object.assign({}, this.center_data, data.data[0])
+        })
+    }
+
+    var right_data = {
+        title:'文章列表',
+        list:[
+            {text:'文章列表1',url:'#'},
+            {text:'文章列表2',url:'#'},
+            {text:'文章列表3',url:'#'},
+            {text:'文章列表4',url:'#'},
+            {text:'文章列表5',url:'#'}
+        ]
+    };
+
+    Vue.component('right-item', {
+        template: '<div class="right_title"><p>{{title}}</p><hr style="height:3px;border:none;" /><li v-for="item in list"><a href="{{item.url}}">{{item.text}}</a></li></div>',
+        data: function () {
+            return center_data
+        }
+    });
+
+    Vue.component('center-item',{
+        template:'<li class="list_item"><div><hr style="height:60px;width: 3px;border:none;float:left;" /><h3 class="center_title">{{title}}</h3><span class="center_date">{{createTime}}</span></div><div id="desc">{{info}}</div><hr style="height:2px;border:none;" /><div><dl><dd id="tips" v-for="tip in tips">{{tip.text}}</dd></dl><span id="rede">阅读全文>>></span></div></li>',
+        data:function(){
+            return center_data
+        }
+    });
+
+    var rightlist = new Vue({
+        el:'#right_list'
+    });
+
+    var centerList = new Vue({
+        el:'#center_list'
+    });
+</script>
+
+</html>

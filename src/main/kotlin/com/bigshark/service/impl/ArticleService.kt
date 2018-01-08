@@ -1,10 +1,11 @@
 package com.bigshark.service.impl
 
-import com.bigshark.bean.AClass
-import com.bigshark.service.IAClassService
-import org.springframework.data.domain.Page
+import com.bigshark.bean.Article
+import com.bigshark.mapper.ArticleMapper
+import com.bigshark.service.IArticleService
+import com.github.pagehelper.PageHelper
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.util.*
 
 /**
  * @Author : bigshark
@@ -13,24 +14,23 @@ import java.util.*
  * @Modificd :
  */
 @Service
-class ArticleService :IAClassService{
-    override fun create(aClass: AClass): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+class ArticleService :IArticleService{
+
+    @Autowired
+    lateinit var mapper:ArticleMapper
+
+    override fun create(article: Article)= mapper.create(article)
+
+    override fun upData(article: Article)= mapper.create(article)
+
+    override fun getById(id: Long)= mapper.getById(id)
+
+    override fun selectAll(param:Map<String,String>):List<Article>{
+        PageHelper.startPage<Int>(param.get("page")!!.toInt(),param.get("rows")!!.toInt())
+        return  mapper.selectAll(param)
     }
 
-    override fun delete(id: Long): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun delete(id: Long)=mapper.delete(id)
 
-    override fun upDate(aClass: AClass): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun getById(id: Long): AClass {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun selectAll(page: Page<AClass>, param: Map<String, Objects>): List<AClass> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getByParentId(parentId: Long)=mapper.getByParentId(parentId)
 }

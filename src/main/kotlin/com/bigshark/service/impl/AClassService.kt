@@ -3,6 +3,7 @@ package com.bigshark.service.impl
 import com.bigshark.bean.AClass
 import com.bigshark.mapper.AClassMapper
 import com.bigshark.service.IAClassService
+import com.github.pagehelper.PageHelper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.stereotype.Service
@@ -31,8 +32,9 @@ class AClassService: IAClassService {
 
     override fun getById(id: Long): AClass = mapper.getById(id)
 
-    override fun selectAll(page: Page<AClass>, param: Map<String, Objects>): List<AClass> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun selectAll(param: Map<String, String>): List<AClass> {
+        PageHelper.startPage<AClass>(param.get("page")!!.toInt(),param.get("rows")!!.toInt())
+        return mapper.selectAll(param)
     }
 
 }
