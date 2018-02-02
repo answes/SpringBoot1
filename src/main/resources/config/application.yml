@@ -1,6 +1,6 @@
 name: SpringBoot1
 server:
-      port: 8888
+      port: 8080
       tomcat.uri-encoding: UTF-8
 spring:
     http:

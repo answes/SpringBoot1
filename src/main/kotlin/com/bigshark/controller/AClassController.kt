@@ -30,5 +30,5 @@ class AClassController {
     }
     @RequestMapping("/getById")
     @ResponseBody
-    fun getById(id:Long):AClass = aclassService.getById(id)
+    fun getById(id:Int):AClass = aclassService.byId(id)
 }

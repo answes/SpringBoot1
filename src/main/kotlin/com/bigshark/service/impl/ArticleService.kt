@@ -21,16 +21,16 @@ class ArticleService :IArticleService{
 
     override fun create(article: Article)= mapper.create(article)
 
-    override fun upData(article: Article)= mapper.create(article)
+    override fun byId(id: Int): Article =mapper.byId(id)
 
-    override fun getById(id: Long)= mapper.getById(id)
+    override fun update(t: Article): Int =mapper.update(t)
+
+    override fun delete(id: Int): Int =mapper.delete(id)
 
     override fun selectAll(param:Map<String,String>):List<Article>{
         PageHelper.startPage<Int>(param.get("page")!!.toInt(),param.get("rows")!!.toInt())
         return  mapper.selectAll(param)
     }
-
-    override fun delete(id: Long)=mapper.delete(id)
 
     override fun getByParentId(parentId: Long)=mapper.getByParentId(parentId)
 }

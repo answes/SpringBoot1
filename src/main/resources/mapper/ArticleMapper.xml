@@ -11,11 +11,14 @@
         <result column="author" property="author" jdbcType="VARCHAR"/>
         <result column="info" property="info" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="zan" property="zan" jdbcType="INTEGER"/>
+        <result column="comment" property="comment" jdbcType="INTEGER"/>
+        <result column="tips" property="tips" jdbcType="VARCHAR"/>
         <result column="createTime" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="updateTime" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="sql">
-        id,parentId,title,author,info,content,createTime,updateTime
+        id,parentId,title,author,info,content,zan,comment,tips,createTime,updateTime
     </sql>
 
     <select id="selectAll" resultMap="BaseResultMap">
@@ -23,8 +26,8 @@
         <include refid="sql"/>
         from blog_article
         WHERE 1=1
-        <if test="param.parentId != null and param.parentId != 0">
-            AND parentId = #{param.parentId}
+        <if test="parentId != null and parentId != 0">
+            AND parentId = #{parentId}
         </if>
         limit 0,20
     </select>
@@ -55,7 +58,7 @@
 
     <insert id="create"  useGeneratedKeys="true" keyProperty="id">
         INSERT INTO blog_article
-        (title,author,info,content,createTime) VALUES (#{title},#{author},#{info},#{content},now())
+        (title,author,info,content,zan,comment,createTime) VALUES (#{title},#{author},#{info},#{content},0,0,now())
     </insert>
 
     <update id="upDate">
@@ -63,6 +66,8 @@
         title = #{title},
         author = #{author},
         info = #{info},
+        zan = #{zan},
+        comment = #{comment},
         content = #{content},
         updateTime = now()
         FROM blog_article

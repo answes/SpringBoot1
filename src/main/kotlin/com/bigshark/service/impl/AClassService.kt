@@ -5,9 +5,7 @@ import com.bigshark.mapper.AClassMapper
 import com.bigshark.service.IAClassService
 import com.github.pagehelper.PageHelper
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.domain.Page
 import org.springframework.stereotype.Service
-import java.util.*
 
 /**
  * @Author : bigshark
@@ -17,21 +15,18 @@ import java.util.*
  */
 @Service
 class AClassService: IAClassService {
+
     @Autowired
     lateinit var mapper: AClassMapper
 
     override fun create(aClass: AClass)=
         mapper.create(aClass)
 
+    override fun byId(id: Int): AClass =mapper.byId(id)
 
-    override fun delete(id: Long): Int = mapper.delete(id)
+    override fun update(t: AClass): Int =mapper.update(t)
 
-    override fun upDate(aClass: AClass): Int {
-        return 1
-    }
-
-    override fun getById(id: Long): AClass = mapper.getById(id)
-
+    override fun delete(id: Int): Int = mapper.delete(id)
     override fun selectAll(param: Map<String, String>): List<AClass> {
         PageHelper.startPage<AClass>(param.get("page")!!.toInt(),param.get("rows")!!.toInt())
         return mapper.selectAll(param)

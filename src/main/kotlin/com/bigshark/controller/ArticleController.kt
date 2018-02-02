@@ -28,33 +28,42 @@ class ArticleController {
 
     @RequestMapping("/createArticle")
     @ResponseBody
-    fun create(parentId:Long,title:String,author:String,content:String,info:String):Int
-            = articleService.create(Article(0,parentId,title,author,content,info,null,null))
+    fun create(parentId:Long,title:String,author:String,content:String,info:String,tips:String):Int
+            = articleService.create(Article(0,parentId,title,author,content,info,0,0,tips,null,null))
+
 
     @RequestMapping("/getAll")
     @ResponseBody
     fun selectAll(page:Long,parentId: Long):ReslutMap{
         val param = HashMap<String,String>()
-        param.put("parentId",parentId.toString())
+        param.put("parentId", parentId.toString())
         param.put("page",page.toString())
         param.put("rows",20.toString())
         val list:List<Article> = articleService.selectAll(param)
         val pages:PageInfo<Article> = PageInfo<Article>(list)
-        return ReslutMap(0,pages,"success");
+        return ReslutMap(0,pages,"success")
     }
+
 
     @RequestMapping("/upDateArticle")
     @ResponseBody
-    fun upDateArticle(parentId:Long,title:String,author:String,content:String,info:String):Int
-            = articleService.upData(Article(0,parentId,title,author,content,info,null,Date()))
+    fun upDateArticle(article: Article):Int
+            = articleService.update(article)
+
+
 
     @RequestMapping("/deleteArticle")
     @ResponseBody
-    fun delete(id:Long):ReslutMap{
+    fun delete(id:Int):ReslutMap{
         val i = articleService.delete(id)
         if (i > 1){
             return ReslutMap(0,null,"success")
         }
         return ReslutMap(1,null,"error")
+    }
+    @RequestMapping("/getById")
+    @ResponseBody
+    fun getById(id: Int):ReslutMap{
+        return ReslutMap(0,articleService.byId(id))
     }
 }

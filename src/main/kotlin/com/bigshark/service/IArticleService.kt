@@ -1,5 +1,6 @@
 package com.bigshark.service
 
+import com.bigshark.base.BaseIService
 import com.bigshark.bean.Article
 
 /**
@@ -8,11 +9,6 @@ import com.bigshark.bean.Article
  * @Date : Create in 16:47 2017/12/22
  * @Modificd :
  */
-interface IArticleService {
-    fun create(article: Article):Int
-    fun upData(article: Article):Int
-    fun getById(id:Long): Article
-    fun selectAll(param:Map<String,String>):List<Article>
-    fun delete(id:Long):Int
+interface IArticleService:BaseIService<Article> {
     fun getByParentId(parentId:Long):List<Article>
 }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bigshark.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.bigshark.bean.User">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="userName" property="userName" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="ip" property="ip" jdbcType="VARCHAR"/>
+        <result column="img" property="img" jdbcType="VARCHAR"/>
+        <result column="login" property="login" jdbcType="INTEGER"/>
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="updateTime" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="sql">
+        id,userName,password,ip,img,login,createTime,updateTime
+    </sql>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT <include refid="sql"/>
+        FROM blog_user WHERE 1=1
+        <if test="userName != null">
+            AND userName = #{userName}
+        </if>
+    </select>
+    <select id="selectByName" resultMap="BaseResultMap">
+        SELECT <include refid="sql"/>
+      FROM blog_user WHERE userName = #{name}
+    </select>
+    <select id="login" resultMap="BaseResultMap">
+        SELECT <include refid="sql"/>
+        FROM blog_user WHERE userName = #{name}
+        AND password = #{password}
+    </select>
+    <insert id="create" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO blog_user (userName,password,ip,img,login,createTime)
+        VALUES (#{userName},#{password},#{ip},#{img},0,now())
+    </insert>
+
+    <select id="byId" resultMap="BaseResultMap">
+    SELECT <include refid="sql"/>
+        FROM blog_user WHERE  id = #{id}
+    </select>
+    <update id="update">
+        UPDATE
+        password = #{password},
+        ip = #{ip},
+        img = #{img},
+        updateTime = now()
+        FROM blog_user WHERE  id = #{id}
+    </update>
+    <delete id="delete">
+        DELETE FROM  blog_user FROM id = #{id}
+    </delete>
+
+</mapper>

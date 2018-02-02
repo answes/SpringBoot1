@@ -1,5 +1,6 @@
 package com.bigshark.mapper
 
+import com.bigshark.base.BaseMapper
 import com.bigshark.bean.Article
 import org.apache.ibatis.annotations.Param
 import org.springframework.stereotype.Component
@@ -11,11 +12,6 @@ import org.springframework.stereotype.Component
  * @Modificd :
  */
 @Component
-interface ArticleMapper {
-    fun create(article:Article):Int
-    fun upData(article:Article):Int
-    fun getById(id:Long):Article
-    fun selectAll(@Param("param")param:Map<String,Any>):List<Article>
-    fun delete(id:Long):Int
+interface ArticleMapper:BaseMapper<Article> {
     fun getByParentId(parentId:Long):List<Article>
 }

@@ -10,12 +10,22 @@ import java.util.*
  */
 
 
+data class Tip(var id:Long =0,
+               var title:String="",
+               var img: String="",
+               var createTime: Date?=null,
+               var updateTime: Date?=null)
+
+
 data class Article(var id:Long = 0,
                    var parentId:Long=0,
                    var title:String="",
                    var author:String="",
                    var content:String="",
                    var info:String="",
+                   var zan:Int = 0,
+                   var comment:Int = 0,
+                   var tips:String = "",
                    var createTime:Date?=null,
                    var updateTime:Date?=null)
 

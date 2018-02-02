@@ -11,4 +11,5 @@ interface BaseIService<T>{
     fun selectAll(param:Map<String,String>):List<T>
     fun byId(id:Int):T
     fun update(t:T):Int
+    fun delete(id:Int):Int
 }

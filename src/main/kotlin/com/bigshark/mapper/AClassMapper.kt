@@ -1,9 +1,8 @@
 package com.bigshark.mapper
 
+import com.bigshark.base.BaseMapper
 import com.bigshark.bean.AClass
-import org.springframework.data.domain.Page
 import org.springframework.stereotype.Component
-import java.util.*
 
 /**
  * @Author : bigshark
@@ -12,10 +11,5 @@ import java.util.*
  * @Modificd :
  */
 @Component
-interface AClassMapper {
-    fun create(aClass:AClass):Int
-    fun delete(id:Long):Int
-    fun upDate(aClass:AClass):Int
-    fun getById(id:Long):AClass
-    fun selectAll(param:Map<String,String>):List<AClass>
+interface AClassMapper:BaseMapper<AClass> {
 }

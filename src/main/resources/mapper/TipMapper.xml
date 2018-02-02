@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bigshark.mapper.TipMapper">
+    <resultMap id="BaseResultMap" type="com.bigshark.bean.Tip">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="img" property="img" jdbcType="VARCHAR"/>
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="updateTime" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="sql">
+        id,title,img,createTime,updateTime
+    </sql>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT <include refid="sql"/>
+        FROM blog_tip
+    </select>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO blog_tip (title,img,createTime)
+        VALUES (#{title},#{img},now())
+    </insert>
+
+    <select id="byId" resultMap="BaseResultMap">
+    SELECT <include refid="sql"/>
+        FROM blog_tip WHERE  id = #{id}
+    </select>
+    <update id="update">
+        UPDATE
+        title = #{title},
+        img = #{img},
+        updateTime = now()
+        FROM blog_tip WHERE  id = #{id}
+    </update>
+    <delete id="delete">
+        DELETE FROM  blog_tip FROM id = #{id}
+    </delete>
+
+</mapper>
