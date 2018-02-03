@@ -32,12 +32,13 @@
         limit 0,20
     </select>
 
-<select id="getById" resultMap="BaseResultMap">
+<select id="byId" resultMap="BaseResultMap">
     SELECT
     <include refid="sql"/>
     FROM  blog_article
     WHERE id=#{id}
 </select>
+
 
     <select id="getByParentId" resultMap="BaseResultMap">
         SELECT
